@@ -1,342 +1,43 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": 5,
-   "id": "c257566e-82c7-4b05-82c6-8a5c40b327c5",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Collecting numpy<2\n",
-      "  Downloading numpy-1.26.4-cp312-cp312-win_amd64.whl.metadata (61 kB)\n",
-      "     ---------------------------------------- 0.0/61.0 kB ? eta -:--:--\n",
-      "     -------------------- ------------------- 30.7/61.0 kB 1.3 MB/s eta 0:00:01\n",
-      "     -------------------------------------- 61.0/61.0 kB 806.3 kB/s eta 0:00:00\n",
-      "Downloading numpy-1.26.4-cp312-cp312-win_amd64.whl (15.5 MB)\n",
-      "   ---------------------------------------- 0.0/15.5 MB ? eta -:--:--\n",
-      "   ---------------------------------------- 0.1/15.5 MB 1.7 MB/s eta 0:00:10\n",
-      "   ---------------------------------------- 0.1/15.5 MB 1.6 MB/s eta 0:00:10\n",
-      "   ---------------------------------------- 0.2/15.5 MB 1.3 MB/s eta 0:00:12\n",
-      "    --------------------------------------- 0.3/15.5 MB 1.6 MB/s eta 0:00:10\n",
-      "    --------------------------------------- 0.4/15.5 MB 1.6 MB/s eta 0:00:10\n",
-      "   - -------------------------------------- 0.4/15.5 MB 1.5 MB/s eta 0:00:10\n",
-      "   - -------------------------------------- 0.5/15.5 MB 1.6 MB/s eta 0:00:10\n",
-      "   - -------------------------------------- 0.6/15.5 MB 1.6 MB/s eta 0:00:10\n",
-      "   - -------------------------------------- 0.6/15.5 MB 1.5 MB/s eta 0:00:11\n",
-      "   - -------------------------------------- 0.7/15.5 MB 1.5 MB/s eta 0:00:10\n",
-      "   - -------------------------------------- 0.7/15.5 MB 1.5 MB/s eta 0:00:10\n",
-      "   - -------------------------------------- 0.7/15.5 MB 1.5 MB/s eta 0:00:10\n",
-      "   -- ------------------------------------- 1.0/15.5 MB 1.7 MB/s eta 0:00:09\n",
-      "   -- ------------------------------------- 1.1/15.5 MB 1.7 MB/s eta 0:00:09\n",
-      "   --- ------------------------------------ 1.2/15.5 MB 1.8 MB/s eta 0:00:08\n",
-      "   --- ------------------------------------ 1.4/15.5 MB 1.9 MB/s eta 0:00:08\n",
-      "   --- ------------------------------------ 1.5/15.5 MB 1.9 MB/s eta 0:00:08\n",
-      "   ---- ----------------------------------- 1.6/15.5 MB 2.0 MB/s eta 0:00:08\n",
-      "   ---- ----------------------------------- 1.8/15.5 MB 2.0 MB/s eta 0:00:07\n",
-      "   ----- ---------------------------------- 1.9/15.5 MB 2.1 MB/s eta 0:00:07\n",
-      "   ----- ---------------------------------- 2.0/15.5 MB 2.0 MB/s eta 0:00:07\n",
-      "   ----- ---------------------------------- 2.1/15.5 MB 2.1 MB/s eta 0:00:07\n",
-      "   ----- ---------------------------------- 2.3/15.5 MB 2.1 MB/s eta 0:00:07\n",
-      "   ------ --------------------------------- 2.4/15.5 MB 2.2 MB/s eta 0:00:07\n",
-      "   ------ --------------------------------- 2.6/15.5 MB 2.3 MB/s eta 0:00:06\n",
-      "   ------- -------------------------------- 3.0/15.5 MB 2.5 MB/s eta 0:00:06\n",
-      "   ------- -------------------------------- 3.1/15.5 MB 2.5 MB/s eta 0:00:06\n",
-      "   -------- ------------------------------- 3.2/15.5 MB 2.5 MB/s eta 0:00:06\n",
-      "   -------- ------------------------------- 3.3/15.5 MB 2.4 MB/s eta 0:00:06\n",
-      "   -------- ------------------------------- 3.4/15.5 MB 2.4 MB/s eta 0:00:05\n",
-      "   --------- ------------------------------ 3.5/15.5 MB 2.4 MB/s eta 0:00:05\n",
-      "   --------- ------------------------------ 3.7/15.5 MB 2.5 MB/s eta 0:00:05\n",
-      "   --------- ------------------------------ 3.9/15.5 MB 2.5 MB/s eta 0:00:05\n",
-      "   ---------- ----------------------------- 4.1/15.5 MB 2.6 MB/s eta 0:00:05\n",
-      "   ---------- ----------------------------- 4.1/15.5 MB 2.6 MB/s eta 0:00:05\n",
-      "   ---------- ----------------------------- 4.2/15.5 MB 2.5 MB/s eta 0:00:05\n",
-      "   ----------- ---------------------------- 4.3/15.5 MB 2.5 MB/s eta 0:00:05\n",
-      "   ----------- ---------------------------- 4.3/15.5 MB 2.5 MB/s eta 0:00:05\n",
-      "   ----------- ---------------------------- 4.5/15.5 MB 2.5 MB/s eta 0:00:05\n",
-      "   ----------- ---------------------------- 4.5/15.5 MB 2.4 MB/s eta 0:00:05\n",
-      "   ----------- ---------------------------- 4.5/15.5 MB 2.4 MB/s eta 0:00:05\n",
-      "   ----------- ---------------------------- 4.5/15.5 MB 2.4 MB/s eta 0:00:05\n",
-      "   ----------- ---------------------------- 4.5/15.5 MB 2.4 MB/s eta 0:00:05\n",
-      "   ------------ --------------------------- 5.0/15.5 MB 2.4 MB/s eta 0:00:05\n",
-      "   ------------- -------------------------- 5.1/15.5 MB 2.4 MB/s eta 0:00:05\n",
-      "   ------------- -------------------------- 5.2/15.5 MB 2.4 MB/s eta 0:00:05\n",
-      "   ------------- -------------------------- 5.4/15.5 MB 2.4 MB/s eta 0:00:05\n",
-      "   -------------- ------------------------- 5.6/15.5 MB 2.5 MB/s eta 0:00:05\n",
-      "   -------------- ------------------------- 5.8/15.5 MB 2.5 MB/s eta 0:00:04\n",
-      "   --------------- ------------------------ 6.0/15.5 MB 2.6 MB/s eta 0:00:04\n",
-      "   --------------- ------------------------ 6.0/15.5 MB 2.6 MB/s eta 0:00:04\n",
-      "   --------------- ------------------------ 6.0/15.5 MB 2.5 MB/s eta 0:00:04\n",
-      "   --------------- ------------------------ 6.0/15.5 MB 2.5 MB/s eta 0:00:04\n",
-      "   --------------- ------------------------ 6.0/15.5 MB 2.5 MB/s eta 0:00:04\n",
-      "   --------------- ------------------------ 6.1/15.5 MB 2.4 MB/s eta 0:00:04\n",
-      "   --------------- ------------------------ 6.2/15.5 MB 2.4 MB/s eta 0:00:04\n",
-      "   ---------------- ----------------------- 6.3/15.5 MB 2.4 MB/s eta 0:00:04\n",
-      "   ---------------- ----------------------- 6.3/15.5 MB 2.3 MB/s eta 0:00:04\n",
-      "   ---------------- ----------------------- 6.3/15.5 MB 2.3 MB/s eta 0:00:04\n",
-      "   ---------------- ----------------------- 6.3/15.5 MB 2.3 MB/s eta 0:00:04\n",
-      "   ---------------- ----------------------- 6.3/15.5 MB 2.3 MB/s eta 0:00:04\n",
-      "   ---------------- ----------------------- 6.4/15.5 MB 2.2 MB/s eta 0:00:05\n",
-      "   ---------------- ----------------------- 6.5/15.5 MB 2.2 MB/s eta 0:00:05\n",
-      "   ---------------- ----------------------- 6.5/15.5 MB 2.2 MB/s eta 0:00:05\n",
-      "   ----------------- ---------------------- 6.6/15.5 MB 2.2 MB/s eta 0:00:05\n",
-      "   ----------------- ---------------------- 6.8/15.5 MB 2.2 MB/s eta 0:00:04\n",
-      "   ----------------- ---------------------- 6.9/15.5 MB 2.2 MB/s eta 0:00:04\n",
-      "   ------------------ --------------------- 7.0/15.5 MB 2.2 MB/s eta 0:00:04\n",
-      "   ------------------ --------------------- 7.2/15.5 MB 2.2 MB/s eta 0:00:04\n",
-      "   ------------------- -------------------- 7.4/15.5 MB 2.3 MB/s eta 0:00:04\n",
-      "   ------------------- -------------------- 7.5/15.5 MB 2.3 MB/s eta 0:00:04\n",
-      "   ------------------- -------------------- 7.5/15.5 MB 2.2 MB/s eta 0:00:04\n",
-      "   ------------------- -------------------- 7.7/15.5 MB 2.3 MB/s eta 0:00:04\n",
-      "   -------------------- ------------------- 7.9/15.5 MB 2.3 MB/s eta 0:00:04\n",
-      "   -------------------- ------------------- 7.9/15.5 MB 2.3 MB/s eta 0:00:04\n",
-      "   -------------------- ------------------- 8.1/15.5 MB 2.3 MB/s eta 0:00:04\n",
-      "   --------------------- ------------------ 8.3/15.5 MB 2.3 MB/s eta 0:00:04\n",
-      "   --------------------- ------------------ 8.4/15.5 MB 2.3 MB/s eta 0:00:04\n",
-      "   ---------------------- ----------------- 8.6/15.5 MB 2.3 MB/s eta 0:00:03\n",
-      "   ---------------------- ----------------- 8.7/15.5 MB 2.3 MB/s eta 0:00:03\n",
-      "   ---------------------- ----------------- 8.8/15.5 MB 2.3 MB/s eta 0:00:03\n",
-      "   ---------------------- ----------------- 8.9/15.5 MB 2.3 MB/s eta 0:00:03\n",
-      "   ----------------------- ---------------- 9.0/15.5 MB 2.3 MB/s eta 0:00:03\n",
-      "   ----------------------- ---------------- 9.2/15.5 MB 2.4 MB/s eta 0:00:03\n",
-      "   ----------------------- ---------------- 9.2/15.5 MB 2.4 MB/s eta 0:00:03\n",
-      "   ------------------------ --------------- 9.5/15.5 MB 2.4 MB/s eta 0:00:03\n",
-      "   ------------------------ --------------- 9.7/15.5 MB 2.4 MB/s eta 0:00:03\n",
-      "   ------------------------ --------------- 9.7/15.5 MB 2.4 MB/s eta 0:00:03\n",
-      "   ------------------------- -------------- 9.7/15.5 MB 2.3 MB/s eta 0:00:03\n",
-      "   ------------------------- -------------- 9.8/15.5 MB 2.3 MB/s eta 0:00:03\n",
-      "   ------------------------- -------------- 10.0/15.5 MB 2.3 MB/s eta 0:00:03\n",
-      "   -------------------------- ------------- 10.1/15.5 MB 2.4 MB/s eta 0:00:03\n",
-      "   -------------------------- ------------- 10.1/15.5 MB 2.4 MB/s eta 0:00:03\n",
-      "   -------------------------- ------------- 10.1/15.5 MB 2.3 MB/s eta 0:00:03\n",
-      "   -------------------------- ------------- 10.3/15.5 MB 2.3 MB/s eta 0:00:03\n",
-      "   -------------------------- ------------- 10.4/15.5 MB 2.4 MB/s eta 0:00:03\n",
-      "   --------------------------- ------------ 10.6/15.5 MB 2.4 MB/s eta 0:00:03\n",
-      "   ---------------------------- ----------- 10.9/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   ---------------------------- ----------- 10.9/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   ---------------------------- ----------- 10.9/15.5 MB 2.4 MB/s eta 0:00:02\n",
-      "   ---------------------------- ----------- 11.1/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   ----------------------------- ---------- 11.3/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   ----------------------------- ---------- 11.3/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   ----------------------------- ---------- 11.5/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   ----------------------------- ---------- 11.6/15.5 MB 2.4 MB/s eta 0:00:02\n",
-      "   ------------------------------ --------- 11.8/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   ------------------------------- -------- 12.2/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   ------------------------------- -------- 12.2/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   ------------------------------- -------- 12.2/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   ------------------------------- -------- 12.4/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   -------------------------------- ------- 12.5/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   -------------------------------- ------- 12.7/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   -------------------------------- ------- 12.8/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   --------------------------------- ------ 12.9/15.5 MB 2.5 MB/s eta 0:00:02\n",
-      "   --------------------------------- ------ 13.2/15.5 MB 2.4 MB/s eta 0:00:01\n",
-      "   ---------------------------------- ----- 13.4/15.5 MB 2.5 MB/s eta 0:00:01\n",
-      "   ----------------------------------- ---- 13.6/15.5 MB 2.5 MB/s eta 0:00:01\n",
-      "   ----------------------------------- ---- 13.9/15.5 MB 2.5 MB/s eta 0:00:01\n",
-      "   ------------------------------------ --- 14.2/15.5 MB 2.5 MB/s eta 0:00:01\n",
-      "   ------------------------------------- -- 14.4/15.5 MB 2.6 MB/s eta 0:00:01\n",
-      "   ------------------------------------- -- 14.7/15.5 MB 2.8 MB/s eta 0:00:01\n",
-      "   -------------------------------------- - 14.9/15.5 MB 2.8 MB/s eta 0:00:01\n",
-      "   -------------------------------------- - 15.1/15.5 MB 2.8 MB/s eta 0:00:01\n",
-      "   ---------------------------------------  15.2/15.5 MB 2.7 MB/s eta 0:00:01\n",
-      "   ---------------------------------------  15.4/15.5 MB 2.8 MB/s eta 0:00:01\n",
-      "   ---------------------------------------- 15.5/15.5 MB 2.7 MB/s eta 0:00:00\n",
-      "Installing collected packages: numpy\n",
-      "  Attempting uninstall: numpy\n",
-      "    Found existing installation: numpy 2.2.6\n",
-      "    Uninstalling numpy-2.2.6:\n",
-      "      Successfully uninstalled numpy-2.2.6\n",
-      "Successfully installed numpy-1.26.4\n"
-     ]
-    },
-    {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "  WARNING: Failed to remove contents in a temporary directory 'C:\\Users\\cebit.ir\\anaconda3\\Lib\\site-packages\\~umpy.libs'.\n",
-      "  You can safely remove it manually.\n",
-      "  WARNING: Failed to remove contents in a temporary directory 'C:\\Users\\cebit.ir\\anaconda3\\Lib\\site-packages\\~-mpy'.\n",
-      "  You can safely remove it manually.\n",
-      "ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n",
-      "shap 0.51.0 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.\n"
-     ]
-    }
-   ],
-   "source": [
-    "!pip install \"numpy<2\""
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 1,
-   "id": "46fd6b69-b8fa-4668-a3ca-b261721c63ed",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "2026-05-04 16:33:32.064 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:32.542 \n",
-      "  \u001b[33m\u001b[1mWarning:\u001b[0m to view this Streamlit app on a browser, run it with the following\n",
-      "  command:\n",
-      "\n",
-      "    streamlit run C:\\Users\\cebit.ir\\anaconda3\\Lib\\site-packages\\ipykernel_launcher.py [ARGUMENTS]\n",
-      "2026-05-04 16:33:32.543 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:32.543 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:32.545 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.051 Thread 'Thread-5': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.067 Thread 'Thread-5': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.067 Thread 'Thread-5': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.695 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.696 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.697 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.698 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.698 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.700 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.700 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.701 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.702 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.703 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.704 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.705 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.706 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.707 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.707 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.709 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.710 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.711 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.712 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.713 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.714 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.715 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.716 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.717 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.718 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.719 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.720 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.721 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.722 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.723 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.724 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.725 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.725 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.726 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.727 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.728 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.729 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.730 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.731 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.732 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.733 Session state does not function when running a script without `streamlit run`\n",
-      "2026-05-04 16:33:33.734 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.734 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.735 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.736 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.737 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.738 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.739 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.740 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.741 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.741 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.742 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.743 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.743 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.744 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.747 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.748 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.749 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.750 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.751 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.752 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.753 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.753 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.754 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.756 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.757 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.758 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.759 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.761 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2026-05-04 16:33:33.762 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n"
-     ]
-    }
-   ],
-   "source": [
-    "import streamlit as st\n",
-    "import pandas as pd\n",
-    "import joblib\n",
-    "\n",
-    "# 1. Load your actual trained AI engine\n",
-    "@st.cache_resource\n",
-    "def load_model():\n",
-    "    return joblib.load('explainable_fraud_model_tuned.pkl')\n",
-    "\n",
-    "pipeline = load_model()\n",
-    "\n",
-    "# 2. Build the User Interface\n",
-    "st.title(\"🚨 Fraud Detection AI Simulator\")\n",
-    "st.markdown(\"Adjust the transaction parameters below to see how the AI evaluates risk in real-time.\")\n",
-    "\n",
-    "# 3. Create Sliders for your 8 engineered features\n",
-    "amt = st.slider(\"Transaction Amount ($)\", 1.0, 5000.0, 50.0)\n",
-    "distance_km = st.slider(\"Distance from Home (km)\", 0.0, 2000.0, 5.0)\n",
-    "trans_hour = st.slider(\"Transaction Hour (0-23)\", 0, 23, 14)\n",
-    "customer_age = st.slider(\"Customer Age\", 18, 100, 35)\n",
-    "\n",
-    "col1, col2 = st.columns(2)\n",
-    "with col1:\n",
-    "    category = st.selectbox(\"Merchant Category\", ['grocery_pos', 'shopping_net', 'gas_transport', 'misc_net'])\n",
-    "    gender = st.selectbox(\"Gender\", ['M', 'F'])\n",
-    "with col2:\n",
-    "    city_pop = st.number_input(\"City Population\", value=100000)\n",
-    "    trans_day_of_week = st.slider(\"Day of Week (0=Mon, 6=Sun)\", 0, 6, 2)\n",
-    "\n",
-    "# 4. Process the data and predict\n",
-    "if st.button(\"Evaluate Transaction\"):\n",
-    "    # Pack the user input into a dataframe\n",
-    "    input_data = pd.DataFrame([[category, amt, gender, city_pop, distance_km, trans_hour, trans_day_of_week, customer_age]], \n",
-    "                              columns=['category', 'amt', 'gender', 'city_pop', 'distance_km', 'trans_hour', 'trans_day_of_week', 'customer_age'])\n",
-    "    \n",
-    "    # Get the fraud probability\n",
-    "    fraud_prob = pipeline.predict_proba(input_data)[0][1] * 100\n",
-    "    \n",
-    "    st.markdown(\"---\")\n",
-    "    if fraud_prob > 50:\n",
-    "        st.error(f\"STATUS: BLOCKED 🛑 | Fraud Probability: {fraud_prob:.2f}%\")\n",
-    "    else:\n",
-    "        st.success(f\"STATUS: APPROVED ✅ | Fraud Probability: {fraud_prob:.2f}%\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "0c91f8a0-dcd0-4136-a15b-d73b5411568b",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3 (ipykernel)",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.12.4"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
-}
+import streamlit as st
+import pandas as pd
+import joblib
+
+# 1. Load your actual trained AI engine
+@st.cache_resource
+def load_model():
+    return joblib.load('explainable_fraud_model_tuned.pkl')
+
+pipeline = load_model()
+
+# 2. Build the User Interface
+st.title("🚨 Fraud Detection AI Simulator")
+st.markdown("Adjust the transaction parameters below to see how the AI evaluates risk in real-time.")
+
+# 3. Create Sliders for your 8 engineered features
+amt = st.slider("Transaction Amount ($)", 1.0, 5000.0, 50.0)
+distance_km = st.slider("Distance from Home (km)", 0.0, 2000.0, 5.0)
+trans_hour = st.slider("Transaction Hour (0-23)", 0, 23, 14)
+customer_age = st.slider("Customer Age", 18, 100, 35)
+
+col1, col2 = st.columns(2)
+with col1:
+    category = st.selectbox("Merchant Category", ['grocery_pos', 'shopping_net', 'gas_transport', 'misc_net'])
+    gender = st.selectbox("Gender", ['M', 'F'])
+with col2:
+    city_pop = st.number_input("City Population", value=100000)
+    trans_day_of_week = st.slider("Day of Week (0=Mon, 6=Sun)", 0, 6, 2)
+
+# 4. Process the data and predict
+if st.button("Evaluate Transaction"):
+    # Pack the user input into a dataframe
+    input_data = pd.DataFrame([[category, amt, gender, city_pop, distance_km, trans_hour, trans_day_of_week, customer_age]], 
+                              columns=['category', 'amt', 'gender', 'city_pop', 'distance_km', 'trans_hour', 'trans_day_of_week', 'customer_age'])
+    
+    # Get the fraud probability
+    fraud_prob = pipeline.predict_proba(input_data)[0][1] * 100
+    
+    st.markdown("---")
+    if fraud_prob > 50:
+        st.error(f"STATUS: BLOCKED 🛑 | Fraud Probability: {fraud_prob:.2f}%")
+    else:
+        st.success(f"STATUS: APPROVED ✅ | Fraud Probability: {fraud_prob:.2f}%")
