@@ -37,6 +37,19 @@ if st.button("Evaluate Transaction"):
     fraud_prob = pipeline.predict_proba(input_data)[0][1] * 100
     
     st.markdown("---")
+    
+    # THE HYBRID DEFENSE: Hard-coded Business Rules catch what the AI misses
+    if category == 'gas_transport' and amt > 500:
+        st.error("STATUS: BLOCKED 🛑 | Alert: Rule-Based Heuristic Override (Impossible Category Amount)")
+    elif fraud_prob > 50:
+        st.error(f"STATUS: BLOCKED 🛑 | AI Fraud Probability: {fraud_prob:.2f}%")
+    else:
+        st.success(f"STATUS: APPROVED ✅ | AI Fraud Probability: {fraud_prob:.2f}%")
+    
+    # Get the fraud probability
+    fraud_prob = pipeline.predict_proba(input_data)[0][1] * 100
+    
+    st.markdown("---")
     if fraud_prob > 50:
         st.error(f"STATUS: BLOCKED 🛑 | Fraud Probability: {fraud_prob:.2f}%")
     else:
