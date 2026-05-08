@@ -21,6 +21,7 @@ customer_age = st.slider("Customer Age", 18, 100, 35)
 
 col1, col2 = st.columns(2)
 with col1:
+    # Your 4 primary app categories
     category = st.selectbox("Merchant Category", ['grocery_pos', 'shopping_net', 'gas_transport', 'misc_net'])
     gender = st.selectbox("Gender", ['M', 'F'])
 with col2:
@@ -33,24 +34,39 @@ if st.button("Evaluate Transaction"):
     input_data = pd.DataFrame([[category, amt, gender, city_pop, distance_km, trans_hour, trans_day_of_week, customer_age]], 
                               columns=['category', 'amt', 'gender', 'city_pop', 'distance_km', 'trans_hour', 'trans_day_of_week', 'customer_age'])
     
-    # Get the fraud probability
+    # Get the AI's predicted fraud probability
     fraud_prob = pipeline.predict_proba(input_data)[0][1] * 100
     
     st.markdown("---")
     
-    # THE HYBRID DEFENSE: Hard-coded Business Rules catch what the AI misses
-    if category == 'gas_transport' and amt > 500:
-        st.error("STATUS: BLOCKED 🛑 | Alert: Rule-Based Heuristic Override (Impossible Category Amount)")
+    # ==========================================
+    # LAYER 2: HARD-CODED HYBRID DEFENSE RULES
+    # ==========================================
+    
+    # Rule 1: Grocery Guardrail
+    if category == 'grocery_pos' and amt > 1500:
+        st.error("STATUS: BLOCKED 🛑 | Rule Override: Impossible Grocery Amount (> $1,500)")
+        
+    # Rule 2: Gas & Transport Guardrail
+    elif category == 'gas_transport' and amt > 500:
+        st.error("STATUS: BLOCKED 🛑 | Rule Override: Impossible Gas/Transport Amount (> $500)")
+        
+    # Rule 3: Online Shopping Guardrail
+    elif category == 'shopping_net' and amt > 3500:
+        st.error("STATUS: BLOCKED 🛑 | Rule Override: Excessive Online Shopping Target (> $3,500)")
+        
+    # Rule 4: Misc Online Guardrail (High Risk)
+    elif category == 'misc_net' and amt > 2000:
+        st.error("STATUS: BLOCKED 🛑 | Rule Override: Suspicious Misc. Web Transfer (> $2,000)")
+        
+    # Rule 5: The "Vampire Hour" Rule (Cross-category)
+    elif amt > 1000 and (1 <= trans_hour <= 5) and distance_km > 200:
+         st.error("STATUS: BLOCKED 🛑 | Rule Override: High-Value, Late-Night, Long-Distance Anomaly")
+         
+    # ==========================================
+    # LAYER 1: RANDOM FOREST AI (If rules pass)
+    # ==========================================
     elif fraud_prob > 50:
         st.error(f"STATUS: BLOCKED 🛑 | AI Fraud Probability: {fraud_prob:.2f}%")
     else:
         st.success(f"STATUS: APPROVED ✅ | AI Fraud Probability: {fraud_prob:.2f}%")
-    
-    # Get the fraud probability
-    fraud_prob = pipeline.predict_proba(input_data)[0][1] * 100
-    
-    st.markdown("---")
-    if fraud_prob > 50:
-        st.error(f"STATUS: BLOCKED 🛑 | Fraud Probability: {fraud_prob:.2f}%")
-    else:
-        st.success(f"STATUS: APPROVED ✅ | Fraud Probability: {fraud_prob:.2f}%")
